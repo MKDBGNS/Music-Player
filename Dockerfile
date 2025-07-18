@@ -2,7 +2,7 @@
 FROM python:3.11-slim
 # Install system dependencies
 RUN apt update && apt install -y ffmpeg git
-CMD ["python", "check_modules.py"]
+
 
 # 🔧 Install system dependencies
 RUN apt update && apt install -y ffmpeg
@@ -23,3 +23,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 🎬 Start your bot
 # CMD ["python", "main.py"]
+CMD ["python", "check_modules.py"]
