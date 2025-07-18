@@ -1,9 +1,24 @@
 FROM nikolaik/python-nodejs:latest
-RUN apt update && apt upgrade -y
-RUN apt install ffmpeg -y
-COPY . /app
+
+# Update system and install ffmpeg
+RUN apt update && apt upgrade -y && apt install ffmpeg -y
+
+# Set working directory
 WORKDIR /app
-RUN chmod 777 /app
-RUN pip3 install --upgrade pip
-RUN pip3 install --no-cache-dir -U -r requirements.txt
-CMD ["python3", "main.py"]
+
+# Copy project files
+COPY . .
+
+# Set permissions (optional, but safer to limit scope)
+RUN chmod -R 755 /app
+
+# Create virtual environment
+RUN python3 -m venv /app/venv
+ENV PATH="/app/venv/bin:$PATH"
+
+# Upgrade pip and install dependencies
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Start the bot
+CMD ["python", "main.py"]
