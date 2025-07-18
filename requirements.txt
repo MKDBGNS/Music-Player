@@ -7,8 +7,6 @@ youtube-search-python
 requests
 aiohttp
 aiofiles
-asyncio
-youtube-search
 ffmpeg-python
 pillow
 future
