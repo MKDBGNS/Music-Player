@@ -2,6 +2,7 @@
 FROM python:3.11-slim
 # Install system dependencies
 RUN apt update && apt install -y ffmpeg git
+CMD ["python", "check_modules.py"]
 
 # 🔧 Install system dependencies
 RUN apt update && apt install -y ffmpeg
