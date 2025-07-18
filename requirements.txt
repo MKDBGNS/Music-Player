@@ -1,7 +1,8 @@
 pyrogram
 tgcrypto
 
-git+https://github.com/positive-curiosity/py-tgcalls-callsmusic.git
+
+git+https://github.com/MKDBGNS/pytgcalls-audio.git
 
 python-dotenv
 yt-dlp
