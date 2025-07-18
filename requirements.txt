@@ -1,7 +1,8 @@
 pyrogram
 tgcrypto
 
-git+https://github.com/pytgcalls/pytgcalls.git@v2.2.3
+
+git+https://github.com/pytgcalls/pytgcalls.git@master
 
 
 
