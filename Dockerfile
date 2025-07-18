@@ -1,22 +1,22 @@
-# Use a stable Python 3.11 image
+# ✅ Stable Python base image
 FROM python:3.11-slim
 
-# Update system and install ffmpeg
+# 🔧 Install system dependencies
 RUN apt update && apt install -y ffmpeg
 
-# Set working directory
+# 📁 Set working directory
 WORKDIR /app
 
-# Copy project files
+# 📦 Copy bot files
 COPY . .
 
-# Create virtual environment
+# 🧪 Create virtual environment
 RUN python -m venv venv
 ENV PATH="/app/venv/bin:$PATH"
 
-# Install dependencies
+# 🚀 Install dependencies
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Start the bot
+# 🎬 Start your bot
 CMD ["python", "main.py"]
