@@ -1,5 +1,7 @@
 from pyrogram import Client
-from pytgcalls import GroupCallFactory
+
+from pytgcalls.group_call_factory import GroupCallFactory
+
 from queues import queues
 import config
 
