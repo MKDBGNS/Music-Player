@@ -1,6 +1,6 @@
 from pyrogram import Client
 from pytgcalls import PyTgCalls
-from pytgcalls.types.stream import AudioPiped
+from pytgcalls.stream import AudioPiped
 from pytgcalls.types import StreamType
 from queues import queues
 import config
@@ -20,9 +20,9 @@ async def stream_audio(chat_id):
         stream_type=StreamType().local_stream
     )
 
-# Handle end of stream
+# Handle stream end
 @pytgcalls.on_stream_end()
-async def on_stream_end(client, update):
+async def on_stream_end(_, update):
     chat_id = update.chat_id
     queues.task_done(chat_id)
 
@@ -31,7 +31,7 @@ async def on_stream_end(client, update):
     else:
         await stream_audio(chat_id)
 
-# Start Pyrogram and PyTgCalls
+# Start everything
 def run():
     client.start()
     pytgcalls.start()
