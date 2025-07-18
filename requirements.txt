@@ -1,6 +1,6 @@
 pyrogram
 tgcrypto
-py-tgcalls==2.2.4
+py-tgcalls==2.2.3
 python-dotenv
 yt-dlp
 youtube-search-python
