@@ -1,7 +1,8 @@
 pyrogram
 tgcrypto
 
-git+https://github.com/pytgcalls/pytgcalls.git@242dcb5
+
+git+https://github.com/pytgcalls/pytgcalls.git@b1e6c3b
 
 python-dotenv
 yt-dlp
