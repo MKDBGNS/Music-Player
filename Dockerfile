@@ -1,7 +1,8 @@
-FROM nikolaik/python-nodejs:latest
+# Use a stable Python 3.11 image
+FROM python:3.11-slim
 
 # Update system and install ffmpeg
-RUN apt update && apt upgrade -y && apt install ffmpeg -y
+RUN apt update && apt install -y ffmpeg
 
 # Set working directory
 WORKDIR /app
@@ -9,14 +10,11 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Set permissions (optional, but safer to limit scope)
-RUN chmod -R 755 /app
-
 # Create virtual environment
-RUN python3 -m venv /app/venv
+RUN python -m venv venv
 ENV PATH="/app/venv/bin:$PATH"
 
-# Upgrade pip and install dependencies
+# Install dependencies
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
