@@ -1,16 +1,9 @@
-from pyrogram import Client as Bot
+from pyrogram import Client
 from pytgcalls import idle
 from callsmusic import run
-from config import API_ID, API_HASH, BOT_TOKEN
+from config import API_ID, API_HASH, STRING_SESSION
 
-bot = Bot(
-    ":memory:",
-    API_ID,
-    API_HASH,
-    bot_token=BOT_TOKEN,
-    plugins=dict(root="handlers")
-)
-
-bot.start()
+userbot = Client(STRING_SESSION, API_ID, API_HASH)
+userbot.start()
 run()
 idle()
