@@ -1,36 +1,41 @@
 from pyrogram import Client
-
-from pytgcalls.group_call_factory import GroupCallFactory
-
+from pytgcalls import PyTgCalls
+from pytgcalls.types.input_stream import AudioPiped
+from pytgcalls.types import StreamType
 from queues import queues
 import config
 
 # Initialize Pyrogram client (user session)
-client = Client(config.SESSION_NAME, config.API_ID, config.API_HASH)
-
-# Create GroupCallFactory instance
-group_call_factory = GroupCallFactory(client)
+client = Client(
+    config.SESSION_NAME,
+    config.API_ID,
+    config.API_HASH
+)
 
 # Create PyTgCalls instance
-pytgcalls = group_call_factory.get_group_call()
+pytgcalls = PyTgCalls(client)
 
-# Function to start streaming
+# Function to start streaming audio
 async def stream_audio(chat_id):
     file_path = queues.get(chat_id)["file"]
-    await pytgcalls.join(chat_id, file_path)
+    await pytgcalls.join_group_call(
+        chat_id,
+        AudioPiped(file_path),
+        stream_type=StreamType().local_stream
+    )
 
-# Handle end of stream (basic loop handler)
-@pytgcalls.on_network_status_changed
+# Handle end of stream and continue queue
+@pytgcalls.on_stream_end()
 async def on_stream_end(_, update):
     chat_id = update.chat_id
     queues.task_done(chat_id)
 
     if queues.is_empty(chat_id):
-        await pytgcalls.leave(chat_id)
+        await pytgcalls.leave_group_call(chat_id)
     else:
         await stream_audio(chat_id)
 
-# Start Pyrogram and PyTgCalls
+# Run Pyrogram and PyTgCalls
 def run():
     client.start()
     pytgcalls.start()
