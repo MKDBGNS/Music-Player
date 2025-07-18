@@ -1,10 +1,11 @@
 from os import getenv
-
 from dotenv import load_dotenv
 
 load_dotenv()
+
 que = {}
 SESSION_NAME = getenv("SESSION_NAME", "session")
+STRING_SESSION = getenv("STRING_SESSION", "")  # ✅ Add this line
 BOT_TOKEN = getenv("BOT_TOKEN", "")
 BOT_USERNAME = getenv("BOT_USERNAME", "")
 admins = {}
