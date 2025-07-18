@@ -1,6 +1,6 @@
 from pyrogram import Client
 from pytgcalls import PyTgCalls
-from pytgcalls.types.input_stream import AudioPiped
+from pytgcalls.types.stream import AudioPiped
 from pytgcalls.types import StreamType
 from queues import queues
 import config
@@ -22,7 +22,7 @@ async def stream_audio(chat_id):
 
 # Handle end of stream
 @pytgcalls.on_stream_end()
-async def on_stream_end(_, update: StreamAudioEnded):
+async def on_stream_end(client, update):
     chat_id = update.chat_id
     queues.task_done(chat_id)
 
