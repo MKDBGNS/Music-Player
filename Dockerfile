@@ -22,5 +22,5 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 🎬 Start your bot
-# CMD ["python", "main.py"]
-CMD ["python", "check_modules.py"]
+ CMD ["python", "main.py"]
+
